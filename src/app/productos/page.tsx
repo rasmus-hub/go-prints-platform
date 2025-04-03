@@ -11,7 +11,7 @@ import { getProducts, getCategories, type Product } from '@/services/products';
 
 import ProductCard from './ProductCard';
 
-const PAGE_SIZE = 1;
+const PAGE_SIZE = 8;
 
 export default function ProductosPage() {
     const [page, setPage] = useState(1);
@@ -30,7 +30,7 @@ export default function ProductosPage() {
         queryFn: () => getProducts(page, PAGE_SIZE, selectedCategory),
         placeholderData: undefined,
         staleTime: 5000,
-        enabled: !isInitialLoad // Solo habilita la consulta después del primer render
+        enabled: !isInitialLoad
     });
 
     const { data: categories } = useQuery({
@@ -54,10 +54,14 @@ export default function ProductosPage() {
     const totalPages = Math.ceil((data?.totalCount || 0) / PAGE_SIZE);
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-8 text-center">Nuestros Productos</h1>
+        <div className="container mx-auto px-4 py-12">
+            <div className="text-center mb-12">
+                <p className="text-light-200 max-w-2xl mx-auto">
+                    Descubre nuestra exclusiva colección de productos de alta calidad
+                </p>
+            </div>
             
-            <div className="mb-8">
+            <div className="mb-12 bg-dark-200 rounded-xl p-6 shadow-lg">
                 <CategoryFilter
                     categories={categories || []}
                     selectedCategory={selectedCategory}
@@ -69,21 +73,31 @@ export default function ProductosPage() {
             </div>
 
             {(isLoading || isFetching) && displayedProducts.length === 0 ? (
-                <LoadingSpinner />
-            ) : displayedProducts.length === 0 ? (
-                <div className="text-center py-12">
-                    <p className="text-xl">No se encontraron productos</p>
+                <div className="flex justify-center items-center h-64">
+                    <LoadingSpinner />
                 </div>
-            ) : (
+                ) : displayedProducts.length === 0 ? (
+                <div className="text-center py-16 bg-dark-200 rounded-xl">
+                    <p className="text-xl text-light-200">No se encontraron productos</p>
+                    <button 
+                    onClick={() => setSelectedCategory(undefined)}
+                    className="mt-4 px-6 py-2 bg-primary hover:bg-primary-light rounded-lg font-medium"
+                    >
+                    Ver todos los productos
+                    </button>
+                </div>
+                ) : (
                 <>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {displayedProducts.map((product) => (
-                            <ProductCard key={`${product.id}-${page}`} product={product} />
-                        ))}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {displayedProducts.map((product) => (
+                        <div key={`${product.id}-${page}`} className="h-full">
+                        <ProductCard product={product} />
+                        </div>
+                    ))}
                     </div>
 
                     {totalPages > 1 && (
-                        <div className="mt-8">
+                        <div className="mt-12 flex justify-center">
                             <Pagination
                                 currentPage={page}
                                 totalPages={totalPages}
