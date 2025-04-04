@@ -17,7 +17,7 @@ Naiki es una plataforma de comercio electrónico desarrollada con **Next.js**, *
 ## Instalación y ejecución local
 1. Clona el repositorio:
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
+   git clone https://github.com/rasmus-hub/go-prints-platform
    cd go-prints-platform
 
 2. Instala las dependencias:
@@ -44,5 +44,7 @@ Desafíos enfrentados
   Revisar la configuración de tailwind.config.ts y postcss.config.mjs, y asegurarse de que los archivos correctos estén en el array content.
 - Persistencia del carrito:
   Implementar localStorage y sincronizarlo con React Query.
+- Planteamiento de idea:
+  Se inicio con la motivación de crear una página E-Commerce basada en la venta de impresoras y material 3D, pero se cambió el rumbo.
 - Despliegue en Vercel:
   Configurar correctamente las rutas y variables de entorno.
