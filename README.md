@@ -30,6 +30,9 @@ Naiki es una plataforma de comercio electrónico desarrollada con **Next.js**, *
 
 4. Abre el navegador en http://localhost:3000
 
+## Plataforma en Vercel
+1. Abre el navegador en https://naiki-platform.vercel.app/
+
 Decisiones técnicas y arquitectónicas
 - **Next.js**: Elegido por su capacidad para renderizado, precarga, manejo de rutas + integración con React y Typescript.
 - **React Query**: Para manejar datos asíncronos de manera eficiente.
