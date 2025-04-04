@@ -34,6 +34,7 @@ Decisiones técnicas y arquitectónicas
 - **Next.js**: Elegido por su capacidad para renderizado, precarga, manejo de rutas + integración con React y Typescript.
 - **React Query**: Para manejar datos asíncronos de manera eficiente.
 - **Tailwind CSS**: Para una estilización rápida y consistente.
+- **Supabase**: Por la versatilidad de funciones y lo rápido que se puede configurar.
 - **Enrutamiento**: Para un manejo versatil de archivos.
 - **localStorage**: Para persistir el estado del carrito en el cliente.
 
@@ -47,4 +48,4 @@ Desafíos enfrentados
 - Planteamiento de idea:
   Se inicio con la motivación de crear una página E-Commerce basada en la venta de impresoras y material 3D, pero se cambió el rumbo.
 - Despliegue en Vercel:
-  Configurar correctamente las rutas y variables de entorno.
+  Configurar correctamente las rutas y variables de entorno. En este caso, se cometio el error de no cargar correctamente las imagenes.
