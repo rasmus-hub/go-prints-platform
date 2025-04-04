@@ -1,45 +1,87 @@
 // hooks/useCart.ts
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-export default function useCart() {
-  const [carrito, setCarrito] = useState<any[]>([]);
+type CartItem = {
+  productId: string;
+  varianteId?: string;
+  cantidad: number;
+  precio: number;
+  nombre: string;
+  imagen: string;
+};
 
-  useEffect(() => {
+const fetchCart = (): CartItem[] => {
+  if (typeof window !== 'undefined') {
     const savedCart = localStorage.getItem('cart');
-    if (savedCart) setCarrito(JSON.parse(savedCart));
-  }, []);
+    return savedCart ? JSON.parse(savedCart) : [];
+  }
+  return [];
+};
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(carrito));
-  }, [carrito]);
+const saveCart = (cart: CartItem[]) => {
+  localStorage.setItem('cart', JSON.stringify(cart));
+};
 
-  const addToCart = (item: {
-    productId: string;
-    varianteId?: string;
-    cantidad: number;
-    precio: number;
-    nombre: string;
-    imagen: string;
-  }) => {
-    setCarrito(prev => {
-      const existingItem = prev.find(i => 
-        i.productId === item.productId && 
-        i.varianteId === item.varianteId
+export function useCart() {
+  const queryClient = useQueryClient();
+
+  const { data: carrito = [] } = useQuery<CartItem[]>({
+    queryKey: ['cart'],
+    queryFn: fetchCart,
+    initialData: []
+  });
+
+  const { mutate: addToCart } = useMutation({
+    mutationFn: (newItem: CartItem) => {
+      const existingItem = carrito.find(item => 
+        item.productId === newItem.productId && 
+        item.varianteId === newItem.varianteId
       );
 
-      if (existingItem) {
-        return prev.map(i =>
-          i.productId === item.productId && i.varianteId === item.varianteId
-            ? { ...i, cantidad: i.cantidad + item.cantidad }
-            : i
-        );
-      }
+      const updatedCart = existingItem
+        ? carrito.map(item =>
+            item.productId === newItem.productId && item.varianteId === newItem.varianteId
+              ? { ...item, cantidad: item.cantidad + newItem.cantidad }
+              : item
+          )
+        : [...carrito, newItem];
 
-      return [...prev, item];
-    });
+      saveCart(updatedCart);
+      return Promise.resolve(updatedCart);
+    },
+    onSuccess: (data) => {
+      queryClient.setQueryData(['cart'], data);
+    }
+  });
+
+  const { mutate: removeFromCart } = useMutation({
+    mutationFn: ({ productId, varianteId }: { productId: string; varianteId?: string }) => {
+      const updatedCart = carrito.filter(item => 
+        !(item.productId === productId && item.varianteId === varianteId)
+      );
+      saveCart(updatedCart);
+      return Promise.resolve(updatedCart);
+    },
+    onSuccess: (data) => {
+      queryClient.setQueryData(['cart'], data);
+    }
+  });
+
+  // Cálculos derivados
+  const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+  const impuestos = subtotal * 0.16;
+  const total = subtotal + impuestos;
+  const count = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+
+  return {
+    carrito,
+    addToCart,
+    removeFromCart,
+    subtotal,
+    impuestos,
+    total,
+    count
   };
-
-  return { carrito, addToCart };
 }
