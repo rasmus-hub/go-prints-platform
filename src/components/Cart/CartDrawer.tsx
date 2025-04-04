@@ -1,16 +1,32 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'
 import React from 'react';
 
-import { useCartContext } from '@/context/CartContext';
-import { useCart } from '@/hooks/useCart';
+import { useCartContext } from '@/context/CartContext'
+import { useOrders } from '@/context/OrderContext'
+import { useCart } from '@/hooks/useCart'
 
 export function CartDrawer() {
-  const { isOpen, closeCart } = useCartContext();
-  const { carrito, removeFromCart, subtotal, impuestos, total, count } = useCart();
+  const { isOpen, closeCart } = useCartContext()
+  const { carrito, removeFromCart, subtotal, impuestos, total, count, clearCart } = useCart()
+  const { addOrder } = useOrders()
+  const router = useRouter()
 
   if (!isOpen) return null;
+
+  const handleCheckout = () => {
+    if (carrito.length === 0) return
+    
+    addOrder([...carrito], total)
+    
+    clearCart()
+    
+    router.push('/compra-exitosa')
+    
+    closeCart()
+  }
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
@@ -109,6 +125,7 @@ export function CartDrawer() {
                 </div>
                 <div className="mt-6">
                   <button
+                    onClick={handleCheckout}
                     className="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:bg-primary-dark hover:shadow-glow-primary"
                   >
                     Finalizar compra
