@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Naiki - Tienda Online
 
-## Getting Started
+## Descripción
+Naiki es una plataforma de comercio electrónico desarrollada con **Next.js**, **React Query** y **Tailwind CSS**. Sus funciones principales son permitir a los usuarios explorar productos, filtrar por categorías y gestionar un carrito de compras.
 
-First, run the development server:
+## Características
+- **Gestión de carrito de compras**:
+  - Agregar, eliminar y limpiar productos del carrito.
+  - Persistencia del carrito con `localStorage`.
+- **Estilización moderna**:
+  - Uso de Tailwind CSS con personalizaciones en `globals.css`.
+- **Manejo de datos asíncronos**:
+  - React Query para obtener productos y categorías.
+- **Cálculo de totales**:
+  - Subtotal, impuestos y total del carrito.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Instalación y ejecución local
+1. Clona el repositorio:
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   cd go-prints-platform
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instala las dependencias:
+   ```bash
+   npm install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Ejecuta el servidor local:
+   ```bash
+   npm run dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Abre el navegador en http://localhost:3000
 
-## Learn More
+Decisiones técnicas y arquitectónicas
+- **Next.js**: Elegido por su capacidad para renderizado, precarga, manejo de rutas + integración con React y Typescript.
+- **React Query**: Para manejar datos asíncronos de manera eficiente.
+- **Tailwind CSS**: Para una estilización rápida y consistente.
+- **Enrutamiento**: Para un manejo versatil de archivos.
+- **localStorage**: Para persistir el estado del carrito en el cliente.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Desafíos enfrentados
+- Novato en Next.js y Tailwind:
+  Al no tener tanto contacto con estas tecnologías, tuve que ver tutoriales para saber el funcionamiento principal de los modulos.
+- Problemas con Tailwind CSS:
+  Revisar la configuración de tailwind.config.ts y postcss.config.mjs, y asegurarse de que los archivos correctos estén en el array content.
+- Persistencia del carrito:
+  Implementar localStorage y sincronizarlo con React Query.
+- Despliegue en Vercel:
+  Configurar correctamente las rutas y variables de entorno.
