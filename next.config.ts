@@ -2,6 +2,17 @@
 const nextConfig = {
   images: {
     remotePatterns: [
+      // Permitir rutas para imagenes del home
+      {
+        protocol: 'https',
+        hostname: 'dcdn-us.mitiendanube.com',
+        pathname: '/stores/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'underarmour.scene7.com',
+        pathname: '/is/image/**',
+      },
       {
         protocol: 'https',
         hostname: 'ejemplo.com',
@@ -10,12 +21,13 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**.ejemplo.com',
       },
+      // Permitir rutas para imagenes de supabase
       {
         protocol: 'https',
         hostname: '**.supabase.co',
       },
     ],
-    unoptimized: process.env.NODE_ENV === 'development',
+    unoptimized: false,
   },
 };
 

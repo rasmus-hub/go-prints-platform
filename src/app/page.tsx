@@ -8,16 +8,16 @@ export default function Home() {
 
     const featuredProducts = [
         {
-        id: 65745,
-        name: "Zapatillas Deportivas",
-        image: "https://dcdn-us.mitiendanube.com/stores/001/163/841/products/9210-azul-varon1-00b3378b0710fbe45116818509530936-1024-1024.jpg",
-        price: 89.99
+            id: 65745,
+            name: "Zapatillas Deportivas",
+            image: "https://dcdn-us.mitiendanube.com/stores/001/163/841/products/9210-azul-varon1-00b3378b0710fbe45116818509530936-1024-1024.jpg",
+            price: 89.99
         },
         {
-        id: 213123,
-        name: "Camisetas Premium",
-        image: "https://underarmour.scene7.com/is/image/Underarmour/V5-1361518-847_FC?rp=standard-0pad|pdpMainDesktop&scl=1&fmt=jpg&qlt=85&resMode=sharp2&cache=on,on&bgc=F0F0F0&wid=566&hei=708&size=566,708",
-        price: 29.99
+            id: 213123,
+            name: "Camisetas Premium",
+            image: "https://underarmour.scene7.com/is/image/Underarmour/V5-1361518-847_FC?rp=standard-0pad|pdpMainDesktop&scl=1&fmt=jpg&qlt=85&resMode=sharp2&cache=on,on&bgc=F0F0F0&wid=566&hei=708&size=566,708",
+            price: 29.99
         }
     ];
 
