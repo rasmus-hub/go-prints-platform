@@ -1,9 +1,8 @@
-// hooks/useCart.ts
 'use client';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-type CartItem = {
+export type CartItem = {
   productId: string;
   varianteId?: string;
   cantidad: number;
@@ -69,19 +68,30 @@ export function useCart() {
     }
   });
 
-  // Cálculos derivados
   const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
   const impuestos = subtotal * 0.16;
   const total = subtotal + impuestos;
   const count = carrito.reduce((sum, item) => sum + item.cantidad, 0);
 
+  const { mutate: clearCart } = useMutation({
+    mutationFn: () => {
+      const emptyCart: CartItem[] = []
+      saveCart(emptyCart)
+      return Promise.resolve(emptyCart)
+    },
+    onSuccess: (data) => {
+      queryClient.setQueryData(['cart'], data)
+    }
+  })
+
   return {
     carrito,
     addToCart,
     removeFromCart,
+    clearCart,
     subtotal,
     impuestos,
     total,
     count
-  };
+  }
 }

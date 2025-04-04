@@ -17,8 +17,14 @@ export function Navbar() {
             <Link href={'/'}>
               <p>Inicio</p>
             </Link>
+            <Link href={'/mi-cuenta'}>
+              <p>Mi Cuenta</p>
+            </Link>
             <Link href={'/productos'}>
               <p>Productos</p>
+            </Link>
+            <Link href={'/favoritos'}>
+              <p>Favoritos</p>
             </Link>
           </div>
           <div className="absolute right-0 flex mt-2 mr-2">
