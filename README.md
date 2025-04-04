@@ -1,7 +1,7 @@
 # Naiki - Tienda Online
 
 ## Descripción
-Naiki es una plataforma de comercio electrónico desarrollada con **Next.js**, **React Query** y **Tailwind CSS**. Sus funciones principales son permitir a los usuarios explorar productos, filtrar por categorías y gestionar un carrito de compras.
+Naiki es una plataforma de simulación de comercio electrónico desarrollada con **Next.js**, **React Query** y **Tailwind CSS**. Sus funciones principales son permitir a los usuarios explorar productos, filtrar por categorías y gestionar un carrito de compras.
 
 ## Características
 - **Gestión de carrito de compras**:
@@ -49,6 +49,6 @@ Desafíos enfrentados
 - Persistencia del carrito:
   Implementar localStorage y sincronizarlo con React Query.
 - Planteamiento de idea:
-  Se inicio con la motivación de crear una página E-Commerce basada en la venta de impresoras y material 3D, pero se cambió el rumbo.
+  Se inicio con la motivación de crear una página E-Commerce basada en la venta de impresoras y material 3D, pero se cambió el rumbo por tiempo.
 - Despliegue en Vercel:
   Configurar correctamente las rutas y variables de entorno. En este caso, se cometio el error de no cargar correctamente las imagenes.
