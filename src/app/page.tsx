@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
-    // Datos de ejemplo no funcionales
+    // Datos de ejemplo no dinamicos
 
     const featuredProducts = [
         {
@@ -31,22 +31,15 @@ export default function Home() {
         <div className="bg-dark-100 text-light-100 min-h-screen">
         {/* Hero Banner */}
         <section className="relative h-96 overflow-hidden">
-            <Image
-            src="/images/hero-banner.jpg"
-            alt="Naiki - Calzado y Ropa Premium"
-            fill
-            className="object-cover opacity-90"
-            priority
-            />
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-40 p-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">NAIKI®</h1>
-            <p className="text-xl mb-8 max-w-2xl">Descubre lo último en calzado y ropa deportiva</p>
-            <Link 
-                href="/productos" 
-                className="px-8 py-3 bg-primary hover:bg-primary-dark rounded-lg text-lg font-medium transition-colors"
-            >
-                Ver Colección
-            </Link>
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">NAIKI®</h1>
+                <p className="text-xl mb-8 max-w-2xl">Descubre lo último en calzado y ropa deportiva</p>
+                <Link 
+                    href="/productos" 
+                    className="px-8 py-3 bg-primary hover:bg-primary-dark rounded-lg text-lg font-medium transition-colors"
+                >
+                    Ver Colección
+                </Link>
             </div>
         </section>
 
@@ -75,20 +68,20 @@ export default function Home() {
                 <div key={product.id} className="bg-dark-200 rounded-lg overflow-hidden hover:shadow-glow transition-all">
                 <div className="relative h-100">
                     <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover"
                     />
                 </div>
                 <div className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
                     <p className="text-primary font-bold text-lg">${product.price.toFixed(2)}</p>
                     <Link 
-                    href={`/productos/${product.id}`}
-                    className="mt-4 inline-block text-sm font-medium hover:underline"
-                    >
-                    Ver detalles →
+                        href={`/productos/${product.id}`}
+                        className="mt-4 inline-block text-sm font-medium hover:underline"
+                        >
+                        Ver detalles →
                     </Link>
                 </div>
                 </div>
